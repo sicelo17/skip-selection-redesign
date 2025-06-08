@@ -51,7 +51,7 @@ export function SkipCard({ skip, isSelected, onSelect, index }: SkipCardProps) {
           </div>
 
           <div className="w-full h-60 flex items-center justify-center bg-white">
-            <img src="public/4-yarder-skip.jpg" alt="4 yard skip" className="object-contain h-full" />
+            <img src="/images/4-yarder-skip.jpg" alt="4 yard skip" className="object-contain h-full" />
           </div>
 
 
