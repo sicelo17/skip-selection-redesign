@@ -1,35 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+"use client";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { useSkips, useSkipSelection } from "./hooks";
+import { SkipSelection } from "./components/features";
+import { ErrorBoundary } from "./components/layout";
+import { QueryProvider, ToastProvider } from "./providers";
+import { formatPrice } from "./utils";
+
+function SkipSelectionApp() {
+  const { selectedSkip, selectSkip, clearSelection } = useSkipSelection();
+
+  const {
+    data: skips,
+    isLoading,
+    error,
+    refetch,
+  } = useSkips({
+    postcode: "NR32",
+    area: "Lowestoft",
+  });
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to load skip options", {
+        description: error.message,
+        action: {
+          label: "Retry",
+          onClick: () => refetch(),
+        },
+      });
+    }
+  }, [error, refetch]);
+
+  const handleSelectSkip = (skip: any) => {
+    selectSkip(skip);
+    toast.success(`Selected ${skip.size} Yard Skip`, {
+      description: `£${formatPrice(skip.price_before_vat, skip.vat)} for ${skip.hire_period_days} days`,
+    });
+  };
+
+  const handleContinue = () => {
+    if (selectedSkip) {
+      toast.success("Proceeding to next step", {
+        description: `You've selected a ${selectedSkip.size} Yard Skip for £${formatPrice(selectedSkip.price_before_vat, selectedSkip.vat)}`,
+      });
+    }
+  };
+
+  const handleBack = () => {
+    toast.info("Going back to previous step");
+    clearSelection();
+   
+  };
+
+  if (error && !skips) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="text-center text-white max-w-md">
+          <h2 className="text-2xl font-bold mb-4">
+            Unable to load skip options
+          </h2>
+          <p className="text-blue-100 mb-6">{error.message}</p>
+          <button
+            onClick={() => refetch()}
+            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <SkipSelection
+      skips={skips || []}
+      selectedSkip={selectedSkip}
+      onSelectSkip={handleSelectSkip}
+      onContinue={handleContinue}
+      onBack={handleBack}
+      isLoading={isLoading}
+    />
+  );
 }
 
-export default App
+function App() {
+  return (
+    <ErrorBoundary>
+      <QueryProvider>
+        <SkipSelectionApp />
+        <ToastProvider />
+      </QueryProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;
