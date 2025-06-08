@@ -37,13 +37,13 @@ export function SkipSelection({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-purple-800 flex items-center justify-center p-4">
-        <div className="text-center text-white">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="text-center text-blue-800">
           <LoadingSpinner size="lg" className="mx-auto mb-4" />
           <h2 className="text-xl font-semibold mb-2">
             Loading skip options...
           </h2>
-          <p className="text-blue-100">
+          <p className="text-blue-400">
             Please wait while we fetch the available skips
           </p>
         </div>
@@ -54,18 +54,8 @@ export function SkipSelection({
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold text-blue-700 mb-3 md:mb-4">
-            Choose Your Skip Size
-          </h1>
-          <p className="text-lg md:text-xl text-blue-400 max-w-2xl mx-auto">
-            Select the skip size that best suits your needs
-          </p>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mb-8 md:mb-12">
+         {/* Progress Bar */}
+        <div className="mb-8 md:mb-12 text-blue-800">
           <ProgressBar className="px-4">
             <ProgressStep isCompleted>
               <MapPin size={isMobile ? 14 : 16} />
@@ -90,6 +80,17 @@ export function SkipSelection({
             <ProgressStep isLast>💳 {!isMobile && "Payment"}</ProgressStep>
           </ProgressBar>
         </div>
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-5xl font-bold text-blue-700 mb-3 md:mb-4">
+            Choose Your Skip Size
+          </h1>
+          <p className="text-lg md:text-xl text-blue-400 max-w-2xl mx-auto">
+            Select the skip size that best suits your needs
+          </p>
+        </div>
+
+       
 
         {/* Skip Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">

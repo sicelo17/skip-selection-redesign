@@ -57,14 +57,14 @@ function SkipSelectionApp() {
   if (error && !skips) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="text-center text-white max-w-md">
+        <div className="text-center text-blue-800 max-w-md">
           <h2 className="text-2xl font-bold mb-4">
             Unable to load skip options
           </h2>
-          <p className="text-blue-100 mb-6">{error.message}</p>
+          <p className="text-blue-400 mb-6">{error.message}</p>
           <button
             onClick={() => refetch()}
-            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            className="bg-400 text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-300 transition-colors"
           >
             Try Again
           </button>

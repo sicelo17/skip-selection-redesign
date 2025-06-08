@@ -44,45 +44,16 @@ export function SkipCard({ skip, isSelected, onSelect, index }: SkipCardProps) {
         onClick={() => onSelect(skip)}
       >
         {/* Skip Visual */}
-        <div className="relative h-36 md:h-44 bg-gradient-to-br from-orange-400 to-orange-600 rounded-t-lg overflow-hidden">
+        <div className="relative h-36 md:h-44 bg-gradient-to-br from-blue-300 to-blue-600 rounded-t-lg overflow-hidden">
           {/* Skip Size Badge */}
-          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+          <div className="absolute top-3 right-3 bg-blue-200 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-blue-900">
             {skip.size} Yards
           </div>
 
-          {/* Skip Illustration */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg
-              viewBox="0 0 100 100"
-              className="w-24 h-24 md:w-32 md:h-32 text-white/80"
-              fill="currentColor"
-            >
-              <polygon
-                points="10,80 90,80 80,20 20,20"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-              />
-              <text
-                x="50"
-                y="45"
-                fontSize="8"
-                textAnchor="middle"
-                className="fill-current"
-              >
-                WE WANT
-              </text>
-              <text
-                x="50"
-                y="55"
-                fontSize="8"
-                textAnchor="middle"
-                className="fill-current"
-              >
-                WASTE
-              </text>
-            </svg>
+          <div className="w-full h-60 flex items-center justify-center bg-white">
+            <img src="public/4-yarder-skip.jpg" alt="4 yard skip" className="object-contain h-full" />
           </div>
+
 
           {/* Selection Indicator */}
           {isSelected && (
@@ -90,7 +61,7 @@ export function SkipCard({ skip, isSelected, onSelect, index }: SkipCardProps) {
           )}
         </div>
 
-        <CardContent className="p-4 md:p-6 flex flex-col h-[calc(100%-9rem)] md:h-[calc(100%-11rem)]">
+        <CardContent className="p-4 md:p-6 flex flex-col h-[calc(100%-9rem)] text-blue-800 md:h-[calc(100%-11rem)]">
           {/* Title and Hire Period */}
           <div className="mb-3">
             <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
@@ -110,8 +81,8 @@ export function SkipCard({ skip, isSelected, onSelect, index }: SkipCardProps) {
 
           {/* Capacity Info (Desktop Only) */}
           {!isMobile && (
-            <div className="mb-4 flex items-start gap-2 text-sm text-muted-foreground">
-              <Info size={14} className="mt-0.5 flex-shrink-0" />
+            <div className="mb-4 flex items-start gap-2 text-sm text-muted-foreground text-blue-800">
+              <Info size={14} className="mt-0.5 flex-shrink-0 " />
               <span className="leading-relaxed">
                 {getSkipCapacityInfo(skip.size)}
               </span>
