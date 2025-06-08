@@ -178,3 +178,5 @@ npm run preview
 - Lazy loading patterns
 
 This architecture provides a solid foundation for a production-grade React application with maintainable, scalable, and performant code.
+
+I included the environment variable `VITE_BASE_URL` in the github repository just for demonstation but i would add it in my .gitignore file for security of our sensitive information
